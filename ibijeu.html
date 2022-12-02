@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>mst</title>
+    </head>
+    <style>
+
+    @font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7g.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlxdr.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdr.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwlxdr.ttf) format('truetype');
+}
+body,
+html {
+  background: #dce1df;
+  color: #4f585e;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-rendering: optimizeLegibility;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  padding-top: 0.1px;
+}
+a.btn {
+  background: #0096a0;
+  border-radius: 4px;
+  box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  display: inline-block;
+  padding: 6px 30px 8px;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.1s 0s ease-out;
+}
+.no-touch a.btn:hover {
+  background: #00a2ad;
+  box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
+  transform: translateY(-2px);
+  transition: all 0.25s 0s ease-out;
+}
+.no-touch a.btn:active,
+a.btn:active {
+  background: #008a93;
+  box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
+  transform: translate3d(0, 1px, 0);
+  transition: all 0.025s 0s ease-out;
+}
+.menu {
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  box-sizing: border-box;
+  z-index: 3;
+  background-color: dimgray;
+}
+.website_name {
+  color: #695681;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 1px;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 2px;
+  opacity: 0.5;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.menu_link {
+  transition: all 0.4s ease;
+  opacity: 0.5;
+}
+.link {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-right: 50px;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.3s 0.2s ease;
+}
+div.cards {
+  margin: 80px auto;
+  max-width: 960px;
+  text-align: center;
+}
+div.card {
+  background: #ffffff;
+  display: inline-block;
+  border-radius: 5px;
+  margin: 8px;
+  max-width: 300px;
+  perspective: 1000;
+  position: relative;
+  text-align: left;
+  transition: all 0.3s 0s ease-in;
+  width: 300px;
+  z-index: 1;
+}
+div.card img {
+  max-width: 300px;
+  border-radius: 5px;
+}
+div.card .card__image-holder {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 0;
+  padding-bottom: 50%;
+}
+div.card div.card-title {
+  background: #ffffff;
+  padding: 6px 15px 10px;
+  position: relative;
+  z-index: 0;
+}
+div.card div.card-title a.toggle-info {
+  border-radius: 32px;
+  height: 32px;
+  padding: 0;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+}
+div.card div.card-title a.toggle-info span {
+  background: #ffffff;
+  display: block;
+  height: 2px;
+  position: absolute;
+  top: 16px;
+  transition: all 0.15s 0s ease-out;
+  width: 12px;
+}
+div.card div.card-title a.toggle-info span.left {
+  right: 14px;
+  transform: rotate(45deg);
+}
+div.card div.card-title a.toggle-info span.right {
+  left: 14px;
+  transform: rotate(-45deg);
+}
+div.card div.card-title h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding: 0;
+}
+div.card div.card-title h2 small {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+div.card div.card-description {
+  padding: 0 15px 10px;
+  position: relative;
+  font-size: 14px;
+}
+div.card div.card-actions {
+  box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+  padding: 10px 15px 20px;
+  text-align: center;
+}
+div.card div.card-flap {
+  background: #d9d9d9;
+  position: absolute;
+  width: 100%;
+  transform-origin: top;
+  transform: rotateX(-90deg);
+}
+div.card div.flap1 {
+  transition: all 0.3s 0.3s ease-out;
+  z-index: -1;
+}
+div.card div.flap2 {
+  transition: all 0.3s 0s ease-out;
+  z-index: -2;
+}
+div.cards.showing div.card {
+  cursor: pointer;
+  opacity: 0.6;
+  transform: scale(0.88);
+}
+.no-touch div.cards.showing div.card:hover {
+  opacity: 0.94;
+  transform: scale(0.92);
+}
+div.card.show {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+div.card.show div.card-title a.toggle-info {
+  background: #ff6666 !important;
+}
+div.card.show div.card-title a.toggle-info span {
+  top: 15px;
+}
+div.card.show div.card-title a.toggle-info span.left {
+  right: 10px;
+}
+div.card.show div.card-title a.toggle-info span.right {
+  left: 10px;
+}
+div.card.show div.card-flap {
+  background: #ffffff;
+  transform: rotateX(0deg);
+}
+div.card.show div.flap1 {
+  transition: all 0.3s 0s ease-out;
+}
+div.card.show div.flap2 {
+  transition: all 0.3s 0.2s ease-out;
+}
+    </style>
+    <script>
+        function clicked(id){
+            switch (id){
+                case 1:
+                    
+                document.getElementById("text").innerHTML  = "<div>Jo n’avait pas le temps, sa promise l’attendait et il ne pouvait se résoudre à la faire patienter plus longtemps. Jo sorti rapidement de chez lui sans aucune préparation, aucun savoir et encore moins de protection. Mais cela ne l’arrêta pas, il savait ce qu’il avait à faire, passa une superbe après-midi et reçu une MST en prime. Pauvre Jo, si seulement il savait ce qu’il faisait… Il aurait pu se documenter plus tôt, ne pas attendre le dernier moment pour se préparer.</div><div> Bad Ending : Jo à une MST et en plus ne sait rien sur les relations mâles femelles.</div>"
+                document.getElementById("1").hidden = true
+                document.getElementById("2").hidden = true
+                break
+                case 2:
+                    document.getElementById("text").innerHTML ="Jo se dit qu’il ne pouvait pas arriver chez Jolyne sans être prêt à 100%. Il voulait être sûr de lui. Dans sa quête de perfection, il trouva par hasard le site du docteur Coco le quokka, un docteur connu dans le domaine des rapports entre individus mâles et femelles. Il y découvrit beaucoup d’informations utiles telles qu’une longue liste de MST, des conseils sur comment aborder sa première fois, … Dans son site, Coco n’avait pas peur de briser des tabous et d’aller jusqu’au fond des choses. Jo n’en revenait pas, jamais il ne se serait douté qu’il pouvait exister tant de choses qu’il ignorait au sujet des relations mâles et femelles. Cependant, Jo n’avait jamais eu de problème de sa vie tout comme ses parents en plus, il n’avait pas envie que ses premières sensations soient biaisées par une espèce de ballon gonflable qui l’empêcherait de bien ressentir sa copine. Jo hésitait donc à prendre de quoi se protéger. Il pouvait ne rien prendre, prendre le ballon gonflable ou la Triforce du courage."
+                    document.getElementById("1").hidden = true
+                    document.getElementById("2").hidden = true
+                    
+                    document.getElementById("3").hidden = false
+                    document.getElementById("4").hidden = false
+                    
+                    document.getElementById("5").hidden = false
+                    break
+                    case 3:
+                        document.getElementById("3").hidden = true
+                        document.getElementById("4").hidden = true
+                        document.getElementById("5").hidden = true
+                        document.getElementById("text").innerHTML  = "        <div>Ayant totalement confiance en son organisme et en ses gènes hérités de ses parents, Jo se dirigea chez Jolyne prêt à faire ce qu’il avait à faire. Malheureusement, il apprit à ses dépens qu’en réalité Jolyne était porteuse d’une MST et que le fait de ne pas avoir pris de protection l’avait condamné à vivre avec la même maladie. La vie de Jo changea du tout au tout le restreignant dans de nombreux domaines. La vie n’était plus aussi amusante qu’avant… Pourquoi a-t-il fallu que son égo soit si gros ?</div><div>            Bad Ending : Jo à attraper une MST car il n’a pas fait assez attention</div>"
+                        break
+                    case 4:
+                        document.getElementById("3").hidden = true
+                        document.getElementById("4").hidden = true
+                        document.getElementById("5").hidden = true
+                        document.getElementById("text").innerHTML  = "<div>Jo, prêt à faire ce qu’il avait à faire, se rendit chez Jolyne où il passa un merveilleux après-midi. Il s’amusa énormément et, grâce à tout ce qu’il avait appris sur le site de Coco le quokka, rien de mauvais n’arriva à lui ou à Jolyne. Depuis ce jour, Jo revit encore et encore Jolyne et purent continuer à s’amuser ensemble jusqu’à l’épuisement.</div><div>            Happy End : Jo s’est renseigné et pourra maintenant s’amuser autant qu’il veut.</div>"
+
+                        break
+                default:
+                    document.getElementById("3").hidden = true
+                    document.getElementById("4").hidden = true
+                    document.getElementById("5").hidden = true
+                    document.getElementById("text").innerHTML  = " <div>Lorsqu’il prit la Triforce du courage, Jo se senti pousser des ailes et décida de sortir explorer le monde extérieur. Après tout, sur le site de Coco, il était écrit que l’abstinence était la meilleure des protections. Jo fit donc fi des appels de Jolyne afin de s’aventurer loin de la forêt. Mais lors de son aventure, il fit la rencontre d’un mystérieux homme qui, obstiné par les ibijaux, décida d’embarquer Jo dans sa valise. Cet homme dont l’identité restait inconnue, accomplit son rêve de toujours, avoir son propre ibijau chez lui. </div><div> B&B Ending : adopté par des professeurs lavallois.</div>"
+                    
+            }
+        }
+    </script>
+    <body>
+        <nav>
+            <div class="menu">
+
+                <p class="website_name">
+                    <a href="./" ><img src="https://cdn.discordapp.com/attachments/1043980978470785104/1048061841043111987/logo.png" height="65"></a></p>
+                <div class="menu_links">
+                    <a href="./ibijeu" class="link">restart</a>
+                </div>
+            </div>
+        </nav>
+        <div class="cards">
+        <div id="text">1er Décembre 2022, Jo l’ibijau se réveilla tard comme à son habitude lorsqu’il reçu un message de sa copine, Jolyne l’ibijau disant ‘’Viens me voir dans l’aprèm, mes parents sont partis’’. A la vue de ce message divin, Jo ne put retenir son excitation. Jamais il n’avait imaginé que le jour-j arriverait si vite. Heureusement, Jo était quelqu’un qui savait rester calme et se mit à penser à tout ce qu’il pourrait faire pour rendre ce jour le meilleur de sa vie.  Seulement, le temps passa si vite que Jo était contraint de faire un choix : partir voir Jolyne sans avoir le temps de se préparer totalement ou continuer à se documenter même cela voulait dire arriver en retard chez Jolyne.</div>
+        <button id="1" onclick="clicked(1)" >Partir maintenant</button>
+        <button id="2" onclick="clicked(2)" >Rester encore</button>
+        <button id="3" onclick="clicked(3)" hidden>Rien</button>
+        <button id="4" onclick="clicked(4)" hidden>Ballon gonflable</button>
+        <button id="5" onclick="clicked(5)" hidden>Triforce</button>
+    </div>
+    </body>
+</html>
